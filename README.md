@@ -64,3 +64,18 @@ To eliminate confusion for API users when an error occurs, we should handle erro
 - 500 Internal server error - This is a generic server error. It probably shouldn't be thrown explicitly.
 - 502 Bad Gateway - This indicates an invalid response from an upstream server.
 - 503 Service Unavailable - This indicates that something unexpected happened on server side (It can be anything like server overload, some parts of the system failed, etc.).
+
+# Allow filtering, sorting, and pagination
+The databases behind a REST API can get very large. Sometimes, there's so much data that it shouldn’t be returned all at once because it’s way too slow or will bring down our systems. Therefore, we need ways to filter items.
+
+We also need ways to paginate data so that we only return a few results at a time. We don't want to tie up resources for too long by trying to get all the requested data at once.
+
+Filtering and pagination both increase performance by reducing the usage of server resources. As more data accumulates in the database, the more important these features become.
+
+We can also specify the fields to sort by in the query string. For instance, we can get the parameter from a query string with the fields we want to sort the data for. Then we can sort them by those individual fields.
+
+For instance, we may want to extract the query string from a URL like:
+
+`http://example.com/articles?sort=+author,-datepublished`
+
+Where + means ascending and - means descending. So we sort by author’s name in alphabetical order and datepublished from most recent to least recent.
