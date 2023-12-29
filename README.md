@@ -24,7 +24,7 @@ When designing endpoints, it makes sense to group those that contain associated 
 
 For example, if we want an endpoint to get the comments for a news article, we should append the /comments path to the end of the /articles path. We can do that with the following code in Express:
 
-```express
+```javascript
 const express = require('express');
 const bodyParser = require('body-parser');
 
@@ -39,10 +39,9 @@ app.get('/articles/:articleId/comments', (req, res) => {
   res.json(comments);
 });
 
-
 app.listen(3000, () => console.log('server started'));
 
-
+```
 In the code above, we can use the GET method on the path '/articles/:articleId/comments'. We get comments on the article identified by articleId and then return it in the response. We add 'comments' after the '/articles/:articleId' path segment to indicate that it's a child resource of /articles.
 
 This makes sense since comments are the children objects of the articles, assuming each article has its own comments. Otherwise, it’s confusing to the user since this structure is generally accepted to be for accessing child objects. The same principle also applies to the POST, PUT, and DELETE endpoints. They can all use the same kind of nesting structure for the path names.
