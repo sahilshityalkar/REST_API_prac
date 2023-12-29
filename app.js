@@ -28,4 +28,11 @@ app.delete('/articles/:id', (req, res) => {
   res.json({ deleted: id });
 });
 
+app.get('/articles/:articleId/comments', (req, res) => {
+  const { articleId } = req.params;
+  const comments = [];
+  // code to get comments by articleId
+  res.json(comments);
+});
+
 app.listen(3000, () => console.log('server started'));
