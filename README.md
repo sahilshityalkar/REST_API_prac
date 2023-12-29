@@ -97,3 +97,17 @@ We can add caching to return data from the local memory cache instead of queryin
 There are many kinds of caching solutions like Redis, in-memory caching, and more. We can change the way data is cached as our needs change.
 
 For instance, Express has the apicache middleware to add caching to our app without much configuration.
+
+# Versioning our APIs
+We should have different versions of API if we're making any changes to them that may break clients. The versioning can be done according to semantic version (for example, 2.0.6 to indicate major version 2 and the sixth patch) like most apps do nowadays.
+
+This way, we can gradually phase out old endpoints instead of forcing everyone to move to the new API at the same time. The v1 endpoint can stay active for people who don’t want to change, while the v2, with its shiny new features, can serve those who are ready to upgrade. This is especially important if our API is public. We should version them so that we won't break third party apps that use our APIs.
+
+Versioning is usually done with /v1/, /v2/, etc. added at the start of the API path.
+
+# Conclusion
+The most important takeaways for designing high-quality REST APIs is to have consistency by following web standards and conventions. JSON, SSL/TLS, and HTTP status codes are all standard building blocks of the modern web.
+
+Performance is also an important consideration. We can increase it by not returning too much data at once. Also, we can use caching so that we don't have to query for data all the time.
+
+Paths of endpoints should be consistent, we use nouns only since the HTTP methods indicate the action we want to take. Paths of nested resources should come after the path of the parent resource. They should tell us what we’re getting or manipulating without the need to read extra documentation to understand what it’s doing.

@@ -6,7 +6,7 @@ let cache = apicache.middleware;
 app.use(cache('5 minutes'));
 
 // employees data in a database
-const employees = [
+const employees2 = [
   { firstName: 'Jane', lastName: 'Smith', age: 20 },
   //...
   { firstName: 'John', lastName: 'Smith', age: 30 },
@@ -68,9 +68,9 @@ app.post('/users', (req, res) => {
   res.json(req.body);
 });
 
-app.get('/employees', (req, res) => {
+app.get('/employees2', (req, res) => {
   const { firstName, lastName, age } = req.query;
-  let results = [...employees];
+  let results = [...employees2];
   if (firstName) {
     results = results.filter(r => r.firstName === firstName);
   }
@@ -86,6 +86,18 @@ app.get('/employees', (req, res) => {
 });
 
 app.get('/employees', (req, res) => {
+  res.json(employees2);
+});
+
+app.get('/v1/employees', (req, res) => {
+  const employees = [];
+  // code to get employees
+  res.json(employees);
+});
+
+app.get('/v2/employees', (req, res) => {
+  const employees = [];
+  // different code to get employees
   res.json(employees);
 });
 
