@@ -79,3 +79,21 @@ For instance, we may want to extract the query string from a URL like:
 `http://example.com/articles?sort=+author,-datepublished`
 
 Where + means ascending and - means descending. So we sort by author’s name in alphabetical order and datepublished from most recent to least recent.
+
+# Maintain good security practices
+Most communication between client and server should be private since we often send and receive private information. Therefore, using SSL/TLS for security is a must.
+
+A SSL certificate isn't too difficult to load onto a server and the cost is free or very low. There's no reason not to make our REST APIs communicate over secure channels instead of in the open.
+
+People shouldn't be able to access more information that they requested. For example, a normal user shouldn't be able to access information of another user. They also shouldn't be able to access data of admins.
+
+To enforce the principle of least privilege, we need to add role checks either for a single role, or have more granular roles for each user.
+
+If we choose to group users into a few roles, then the roles should have the permissions that cover all they need and no more. If we have more granular permissions for each feature that users have access to, then we have to make sure that admins can add and remove those features from each user accordingly. Also, we need to add some preset roles that can be applied to a group users so that we don’t have to do that for every user manually.
+
+# Cache data to improve performance
+We can add caching to return data from the local memory cache instead of querying the database to get the data every time we want to retrieve some data that users request. The good thing about caching is that users can get data faster. However, the data that users get may be outdated. This may also lead to issues when debugging in production environments when something goes wrong as we keep seeing old data.
+
+There are many kinds of caching solutions like Redis, in-memory caching, and more. We can change the way data is cached as our needs change.
+
+For instance, Express has the apicache middleware to add caching to our app without much configuration.
